@@ -29,3 +29,12 @@ function randomizeImage() {
   imageContainer.innerHTML = '';
   imageContainer.appendChild(imgElement);
 }
+
+/**
+ * Fetches a hello message from the server and adds it to the DOM.
+ */
+function getHelloMessage() {
+  fetch('/data').then(response => response.text()).then((text) => {
+    document.getElementById('hello-message').innerText = text;
+  });
+}
