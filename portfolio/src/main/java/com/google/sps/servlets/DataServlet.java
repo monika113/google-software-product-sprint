@@ -14,6 +14,8 @@
 
 package com.google.sps.servlets;
 
+import com.google.gson.Gson;
+import java.util.*;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +28,13 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    response.getWriter().println("Hello Lingyu!");
+    ArrayList<String> messages = new ArrayList<String>();
+    messages.add("test message 1");
+    messages.add("test message 2");
+    messages.add("test message 3");
+    Gson gson = new Gson();
+    String json = gson.toJson(messages);
+    response.setContentType("application/json;");
+    response.getWriter().println(json);
   }
 }

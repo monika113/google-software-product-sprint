@@ -31,10 +31,28 @@ function randomizeImage() {
 }
 
 /**
- * Fetches a hello message from the server and adds it to the DOM.
+ * Fetches a list of test messages from the server and adds it to the DOM.
  */
-function getHelloMessage() {
-  fetch('/data').then(response => response.text()).then((text) => {
-    document.getElementById('hello-message').innerText = text;
+function getTestMessage() {
+  fetch('/data').then(response => response.json()).then((text) => {
+      console.log("fetch json: " + text);
+    const testMessageElement = document.getElementById('test-message')
+    testMessageElement.innerText = '';
+    testMessageElement.appendChild(
+        createListElement(text[0])
+    )
+    testMessageElement.appendChild(
+        createListElement(text[1])
+    )
+    testMessageElement.appendChild(
+        createListElement(text[2])
+    )
   });
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }
