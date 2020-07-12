@@ -33,20 +33,14 @@ function randomizeImage() {
 /**
  * Fetches a list of test messages from the server and adds it to the DOM.
  */
-function getTestMessage() {
+function getComments() {
   fetch('/data').then(response => response.json()).then((text) => {
       console.log("fetch json: " + text);
-    const testMessageElement = document.getElementById('test-message')
-    testMessageElement.innerText = '';
-    testMessageElement.appendChild(
-        createListElement(text[0])
-    )
-    testMessageElement.appendChild(
-        createListElement(text[1])
-    )
-    testMessageElement.appendChild(
-        createListElement(text[2])
-    )
+    const commentListElement = document.getElementById('comments')
+    commentListElement.innerText = '';
+    text.forEach((line) => {
+    commentListElement.appendChild(createListElement(line))
+    });
   });
 }
 
