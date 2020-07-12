@@ -15,9 +15,13 @@
 package com.google.sps.servlets;
 
 import com.google.gson.Gson;
+import com.google.sps.data.Comment;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import java.util.*;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -33,6 +37,20 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+
+    List<Comment> comments = new ArrayList<>();
+    for (Entity entity : results.asIterable()) {
+      String userName = (String) entity.getProperty("userName");
+      String text = (String) entity.getProperty("text");
+      long timestamp = (long) entity.getProperty("timestamp");
+
+      Comment comment = new Comment(userName, text, timestamp);
+      comments.add(comment);
+    }
+
     Gson gson = new Gson();
     String json = gson.toJson(comments);
     response.setContentType("application/json;");
@@ -43,10 +61,12 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String text = getParameter(request, "comment", "");
     String name = getParameter(request, "name", "");
+    long timestamp = System.currentTimeMillis();
     //comments.add(text);
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("userName", name);
     commentEntity.setProperty("text", text);
+    commentEntity.setProperty("timestamp", timestamp);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);

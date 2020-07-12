@@ -39,14 +39,25 @@ function getComments() {
     const commentListElement = document.getElementById('comments')
     commentListElement.innerText = '';
     text.forEach((line) => {
-    commentListElement.appendChild(createListElement(line))
+    commentListElement.appendChild(createCommentElement(line))
     });
   });
 }
 
-/** Creates an <li> element containing text. */
-function createListElement(text) {
+/** Creates an element containing user name, comment. */
+function createCommentElement(line) {
   const liElement = document.createElement('li');
-  liElement.innerText = text;
+  //liElement.className = 'comment';
+  //const userNameElement = document.createElement('span');
+  //userNameElement.innerText = line.userName;
+  //const textElement = document.createElement('span');
+  //textElement.innerText = line.text;
+  //const timeElement = document.createElement('span');
+  //timeElement.innerText = line.timestamp;
+
+  //liElement.appendChild(userNameElement);
+  //liElement.appendChild(textElement);
+  //liElement.appendChild(timeElement);
+  liElement.innerText = line.userName + ": " + line.text;
   return liElement;
 }
