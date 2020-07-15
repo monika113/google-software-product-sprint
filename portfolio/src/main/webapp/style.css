@@ -7,3 +7,11 @@
 #greeting-container {
   margin-top: 20px;
 }
+
+#random-image-container {
+    width: 650px;
+}
+
+#random-image-container img{
+    width: 100%;
+}

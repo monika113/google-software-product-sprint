@@ -6,13 +6,28 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body>
+  <body onload="getComments()">
     <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+      <h1>Lingyu's Portfolio</h1>
+      <p>Hello, I am Lingyu Sun. I am now a master student in Tsinghua University. I studied math when I was undergraduate and then switched to statistics. But I really love coding! I hope I can make new friends in SPS :)</p>
+      <img src="images/image_Selfie.jpeg" width="80%" align="middle"/>
+      <p> If you want to know more about me ~</p>
+      <ul>
+      <li><p><a href="https://github.com/monika113" target="_blank">My Github</a></p></li>
+      <li><p>Click <a href="experiences.html">here</a> to see more about my experiences</p></li>
+      <li><p>Click <a href="photo_with_google.html">here</a> to see some photos I took with Google before</p></li>
+      </ul>
+      <form action="/data" method="POST">
+        
+        <p>Your name: <input type="text" name="name" value="Anonymous" > </p>
+        <p>Please write your comment here:</p>
+        <textarea name="comment" style="width:100%; height:100px;"></textarea>
+        <br/><br/>
+
+        <input type="submit" value="Submit"/>
+      </form>
+      <p> Previous Comments:</p>
+      <ul id="comments"></ul>
     </div>
   </body>
 </html>

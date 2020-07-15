@@ -13,16 +13,51 @@
 // limitations under the License.
 
 /**
- * Adds a random greeting to the page.
+ * Generates a URL for a random image in the images directory and adds an img
+ * element with that URL to the page.
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+function randomizeImage() {
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+  const imageIndex = Math.floor(Math.random() * 12) + 1;
+  const imgUrl = 'images/photo-with-google/' + imageIndex + '.jpeg';
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+  const imgElement = document.createElement('img');
+  imgElement.src = imgUrl;
+
+  const imageContainer = document.getElementById('random-image-container');
+  // Remove the previous image.
+  imageContainer.innerHTML = '';
+  imageContainer.appendChild(imgElement);
+}
+
+/**
+ * Fetches a list of test messages from the server and adds it to the DOM.
+ */
+function getComments() {
+  fetch('/data').then(response => response.json()).then((text) => {
+      console.log("fetch json: " + text);
+    const commentListElement = document.getElementById('comments')
+    commentListElement.innerText = '';
+    text.forEach((line) => {
+    commentListElement.appendChild(createCommentElement(line))
+    });
+  });
+}
+
+/** Creates an element containing user name, comment. */
+function createCommentElement(line) {
+  const liElement = document.createElement('li');
+  //liElement.className = 'comment';
+  //const userNameElement = document.createElement('span');
+  //userNameElement.innerText = line.userName;
+  //const textElement = document.createElement('span');
+  //textElement.innerText = line.text;
+  //const timeElement = document.createElement('span');
+  //timeElement.innerText = line.timestamp;
+
+  //liElement.appendChild(userNameElement);
+  //liElement.appendChild(textElement);
+  //liElement.appendChild(timeElement);
+  liElement.innerText = line.userName + ": " + line.text;
+  return liElement;
 }
