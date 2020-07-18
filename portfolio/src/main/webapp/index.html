@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body onload="getComments()">
+  <body onload="checkLoginStatus()">
     <div id="content">
       <h1>Lingyu's Portfolio</h1>
       <p>Hello, I am Lingyu Sun. I am now a master student in Tsinghua University. I studied math when I was undergraduate and then switched to statistics. But I really love coding! I hope I can make new friends in SPS :)</p>
@@ -17,8 +17,9 @@
       <li><p>Click <a href="experiences.html">here</a> to see more about my experiences</p></li>
       <li><p>Click <a href="photo_with_google.html">here</a> to see some photos I took with Google before</p></li>
       </ul>
-      <p>Click <a href="/login_status">here</a> to check if you have logged in</p>
-      <form action="/data" method="POST">
+      <hr />
+      <p id="login_status"></p>
+      <form id="write_comment" action="/data" method="POST" hidden>
         
         <p>Your name: <input type="text" name="name" value="Anonymous" > </p>
         <p>Please write your comment here:</p>
@@ -28,7 +29,7 @@
         <input type="submit" value="Submit"/>
       </form>
       <p> Previous Comments:</p>
-      <ul id="comments"></ul>
+      <ul id="comments" hidden></ul>
     </div>
   </body>
 </html>

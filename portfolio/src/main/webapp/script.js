@@ -35,8 +35,8 @@ function randomizeImage() {
  */
 function getComments() {
   fetch('/data').then(response => response.json()).then((text) => {
-      console.log("fetch json: " + text);
-    const commentListElement = document.getElementById('comments')
+      console.log("fetch comments json: " + text);
+    const commentListElement = document.getElementById('comments');
     commentListElement.innerText = '';
     text.forEach((line) => {
     commentListElement.appendChild(createCommentElement(line))
@@ -60,4 +60,26 @@ function createCommentElement(line) {
   //liElement.appendChild(timeElement);
   liElement.innerText = line.userName + ": " + line.text;
   return liElement;
+}
+
+/** check if a user has loged in. if so, show the comments */
+function checkLoginStatus() {
+  fetch('/login_status').then(response => response.json()).then((text) => {
+      console.log("fetch user status json: " + text);
+
+      if (text.isLogin){
+          const loginContainer = document.getElementById('login_status');
+          loginContainer.innerHTML = "Welcome, " + text.email + "\n <a href=\"" + text.LoginLink + "\">(log out)</a>.";
+          getComments();
+          document.getElementById('write_comment').hidden = false;
+          document.getElementById('comments').hidden = false;
+      }
+      else{
+          const loginContainer = document.getElementById('login_status');
+          loginContainer.innerHTML = "Hello, Stranger. Please <a href=\"" + text.LoginLink + "\">log in</a> to view and write comments.";
+          //loginContainer.appendChild(prompt);
+          document.getElementById('write_comment').hidden = true;
+          document.getElementById('comments').hidden = true;
+      }
+  });
 }
