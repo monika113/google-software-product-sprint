@@ -68,15 +68,19 @@ function checkLoginStatus() {
       console.log("fetch user status json: " + text);
 
       if (text.isLogin){
+          if (text.userName == null){
+              text.userName == text.email;
+          }
           const loginContainer = document.getElementById('login_status');
-          loginContainer.innerHTML = "Welcome, " + text.email + "\n <a href=\"" + text.LoginLink + "\">(log out)</a>.";
+          loginContainer.innerHTML = "Welcome, " + text.userName + "\n <a href=\"" + text.loginLink + "\">(log out)</a>.";
           getComments();
           document.getElementById('write_comment').hidden = false;
           document.getElementById('comments').hidden = false;
+          document.getElementById('user_nickname').value = text.userName;
       }
       else{
           const loginContainer = document.getElementById('login_status');
-          loginContainer.innerHTML = "Hello, Stranger. Please <a href=\"" + text.LoginLink + "\">log in</a> to view and write comments.";
+          loginContainer.innerHTML = "Hello, Stranger. Please <a href=\"" + text.loginLink + "\">log in</a> to view and write comments.";
           //loginContainer.appendChild(prompt);
           document.getElementById('write_comment').hidden = true;
           document.getElementById('comments').hidden = true;

@@ -19,11 +19,15 @@ public final class User {
 
   private final boolean isLogin;
   private final String email;
-  private final String LoginLink;
+  private final String userId;
+  private final String userName;
+  private final String loginLink;
   
-  public User(boolean isLogin, String email, String LoginLink) {
+  public User(boolean isLogin, String email, String userId, String userName, String loginLink) {
     this.isLogin = isLogin;
     this.email = email;
-    this.LoginLink = LoginLink;
+    this.userId = userId;
+    this.userName = userName; 
+    this.loginLink = loginLink;
   }
 }

@@ -67,6 +67,7 @@ public class DataServlet extends HttpServlet {
     long timestamp = System.currentTimeMillis();
     UserService userService = UserServiceFactory.getUserService();
     String userEmail = userService.getCurrentUser().getEmail();
+    String userId = userService.getCurrentUser().getUserId();
     //comments.add(text);
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("userName", name);
@@ -74,8 +75,13 @@ public class DataServlet extends HttpServlet {
     commentEntity.setProperty("text", text);
     commentEntity.setProperty("timestamp", timestamp);
 
+    Entity userInfoEntity = new Entity("UserInfo", userId);
+    userInfoEntity.setProperty("userId", userId);
+    userInfoEntity.setProperty("userName", name);
+
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
+    datastore.put(userInfoEntity);
 
     // Redirect back to the HTML page.
     response.sendRedirect("/index.html");
