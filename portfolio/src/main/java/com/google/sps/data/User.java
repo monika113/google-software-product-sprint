@@ -15,21 +15,19 @@
 package com.google.sps.data;
 
 /** An item on a todo list. */
-public final class Comment {
+public final class User {
 
+  private final boolean isLogin;
+  private final String email;
+  private final String userId;
   private final String userName;
-  private final String userEmail;
-  private final String text;
-  private final long timestamp;
-  private final String imageUrl;
-  private final String imageLables;
-
-  public Comment(String userName, String userEmail, String text, String imageUrl, String imageLables, long timestamp) {
-    this.userName = userName;
-    this.userEmail = userEmail;
-    this.text = text;
-    this.imageUrl = imageUrl;
-    this.imageLables = imageLables;
-    this.timestamp = timestamp;
+  private final String loginLink;
+  
+  public User(boolean isLogin, String email, String userId, String userName, String loginLink) {
+    this.isLogin = isLogin;
+    this.email = email;
+    this.userId = userId;
+    this.userName = userName; 
+    this.loginLink = loginLink;
   }
 }
