@@ -68,6 +68,7 @@ function createCommentElement(line) {
     const imgElement = document.createElement('img');
     imgElement.src = line.imageUrl;
     liElement.appendChild(imgElement);
+    liElement.innerHTML += "<br/>" + line.imageLables;
   }
   return liElement;
 }
