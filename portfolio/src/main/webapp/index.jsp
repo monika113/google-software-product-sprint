@@ -40,6 +40,7 @@ limitations under the License.
       <li><p><a href="https://github.com/monika113" target="_blank">My Github</a></p></li>
       <li><p>Click <a href="experiences.html">here</a> to see more about my experiences</p></li>
       <li><p>Click <a href="photo_with_google.html">here</a> to see some photos I took with Google before</p></li>
+      <li><p>Click <a href="map.html">here</a> to see my footmarks.</p></li>
       </ul>
       <hr />
       <p id="login_status"></p>

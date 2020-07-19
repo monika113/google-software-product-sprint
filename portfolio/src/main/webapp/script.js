@@ -99,3 +99,71 @@ function checkLoginStatus() {
       }
   });
 }
+
+/** Creates a map that shows markers and info windows. */
+function createMap() {
+  const map = new google.maps.Map(
+      document.getElementById('map'),
+      {center: {lat: 40.22077, lng: 116.23128}, zoom: 4});
+
+  const marker1 = new google.maps.Marker({
+    position: {lat: 40.22077, lng: 116.23128},
+    map: map,
+    title: 'Beijing'
+  });
+
+  const infoWindow1 =
+      new google.maps.InfoWindow({content: 'I studied in Beijing for my bachelor and master degree.'});
+  infoWindow1.open(map, marker1);
+
+  const marker2 = new google.maps.Marker({
+    position: {lat: 30.2084, lng: 120.21201},
+    map: map,
+    title: 'Hangzhou'
+  });
+
+  const infoWindow2 =
+      new google.maps.InfoWindow({content: 'Hangzhou is my hometown.'});
+  infoWindow2.open(map, marker2);
+
+  const marker3 = new google.maps.Marker({
+    position: {lat: 23.697809, lng: 120.960518},
+    map: map,
+    title: 'Taiwan'
+  });
+
+  const infoWindow3 =
+      new google.maps.InfoWindow({content: 'I traveled to Taiwan with my friend Joe in 2018.'});
+  infoWindow3.open(map, marker3);
+
+  const marker4 = new google.maps.Marker({
+    position: {lat: 4.210484, lng: 101.975769},
+    map: map,
+    title: 'Malaysia'
+  });
+
+  const infoWindow4 =
+      new google.maps.InfoWindow({content: 'I visited Malaysia for my graduation trip in 2019, where I tried deep diving for the first time.'});
+  infoWindow4.open(map, marker4);
+
+  const marker5 = new google.maps.Marker({
+    position: {lat: 50.3, lng: 108},
+    map: map,
+    title: 'Baikal'
+  });
+
+  const infoWindow5 =
+      new google.maps.InfoWindow({content: 'It is the first time I took my mother on a trip abroad, to Baikal Lake, Russia. I will do it again.'});
+  infoWindow5.open(map, marker5);
+
+  const marker6 = new google.maps.Marker({
+    position: {lat: 30.572815, lng: 104.066803},
+    map: map,
+    title: 'Chengdu'
+  });
+
+  const infoWindow6 =
+      new google.maps.InfoWindow({content: 'Pandas are so cute!!! But food is too spicy for me.'});
+  infoWindow6.open(map, marker6);
+
+}
