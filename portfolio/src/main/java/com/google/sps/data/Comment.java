@@ -21,11 +21,13 @@ public final class Comment {
   private final String userEmail;
   private final String text;
   private final long timestamp;
+  private final String imageUrl;
 
-  public Comment(String userName, String userEmail, String text, long timestamp) {
+  public Comment(String userName, String userEmail, String text, String imageUrl, long timestamp) {
     this.userName = userName;
     this.userEmail = userEmail;
     this.text = text;
+    this.imageUrl = imageUrl;
     this.timestamp = timestamp;
   }
 }

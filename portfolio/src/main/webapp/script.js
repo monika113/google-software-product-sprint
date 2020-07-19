@@ -37,7 +37,7 @@ function getComments() {
   fetch('/data').then(response => response.json()).then((text) => {
       console.log("fetch comments json: " + text);
     const commentListElement = document.getElementById('comments');
-    commentListElement.innerText = '';
+    commentListElement.innerHTML = '';
     text.forEach((line) => {
     commentListElement.appendChild(createCommentElement(line))
     });
@@ -58,7 +58,17 @@ function createCommentElement(line) {
   //liElement.appendChild(userNameElement);
   //liElement.appendChild(textElement);
   //liElement.appendChild(timeElement);
-  liElement.innerText = line.userName + ": " + line.text;
+  var name = line.userEmail;
+  if (line.userName != null && line.userName != ""){
+    name = line.userName;
+  }
+  liElement.innerHTML = name + ": " + line.text + "<br/>";
+  
+  if (line.imageUrl != null){
+    const imgElement = document.createElement('img');
+    imgElement.src = line.imageUrl;
+    liElement.appendChild(imgElement);
+  }
   return liElement;
 }
 
@@ -68,11 +78,12 @@ function checkLoginStatus() {
       console.log("fetch user status json: " + text);
 
       if (text.isLogin){
-          if (text.userName == null){
-              text.userName == text.email;
+          var name = text.email;
+          if (text.userName != null && text.userName != ""){
+              name = text.userName;
           }
           const loginContainer = document.getElementById('login_status');
-          loginContainer.innerHTML = "Welcome, " + text.userName + "\n <a href=\"" + text.loginLink + "\">(log out)</a>.";
+          loginContainer.innerHTML = "Welcome, " + name + "\n <a href=\"" + text.loginLink + "\">(log out)</a>.";
           getComments();
           document.getElementById('write_comment').hidden = false;
           document.getElementById('comments').hidden = false;
